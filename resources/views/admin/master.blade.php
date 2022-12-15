@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Tabel Admin</title>
+    <title>Tabel Montir</title>
 
     <!-- Custom fonts for this template -->
     <link href="{{ asset('admin/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
@@ -21,7 +21,8 @@
     <link href="{{ asset('admin/css/sb-admin-2.min.css') }}" rel="stylesheet">
 
     <!-- Custom styles for this page -->
-    <link href="{{ asset('admin/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+    {{-- <link href="{{ asset('admin/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet"> --}}
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
 
 </head>
 
@@ -30,7 +31,7 @@
     <!-- Page Wrapper -->
     <div id="wrapper">
         @stack('before-content')
-        @include('layouts.sidebar')
+        @include('admin.sidebar')
 
 
         <!-- Content Wrapper -->
@@ -310,12 +311,14 @@
     <script src="{{ asset('admin/js/sb-admin-2.min.js') }}"></script>
 
     <!-- Page level plugins -->
-    <script src="{{ asset('admin/vendor/datatables/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('admin/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
+    {{-- <script src="{{ asset('admin/vendor/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('admin/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script> --}}
+    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
 
     <!-- Page level custom scripts -->
     <script src="{{ asset('admin/js/demo/datatables-demo.js') }}"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    @stack('script')
 
 </body>
 

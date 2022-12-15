@@ -42,4 +42,24 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Get all of the dataPelanggan for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function dataPelanggan()
+    {
+        return $this->hasMany(Pelanggan::class, 'user_id', 'id');
+    }
+
+    /**
+     * Get all of the motor for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function motor()
+    {
+        return $this->hasMany(Motor::class, 'user_id', 'id');
+    }
 }

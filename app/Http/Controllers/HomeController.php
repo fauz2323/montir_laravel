@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -25,12 +23,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        if (Auth::user()->hasRole('admin')) {
-            $userCount = User::count();
-            return view('home.admin', compact('userCount'));
-        } elseif (Auth::user()->hasRole('user')) {
-
-            return view('home.user');
-        }
+        return view('home');
     }
 }

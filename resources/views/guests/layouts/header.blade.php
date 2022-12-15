@@ -33,9 +33,9 @@
                     </li>
                 @else
                     <li>
-                        <a class="nav-link scrollto" href="/login"<i class="bi bi-arrow-right-square"></i>Log-in</a>
+                        <a class="nav-link scrollto" href="/login"<i class="bi bi-arrow-right-square"></i>=>Log-in</a>
                     </li>
-                    <li><a class="nav-link scrollto" href="/register"<i class="bi bi-arrow-right-square"></i>Sign-in</a></li>
+                    <li><a class="nav-link scrollto" href="/register"<i class="bi bi-arrow-right-square"></i>=>Sign-in</a></li>
                 @endauth
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>

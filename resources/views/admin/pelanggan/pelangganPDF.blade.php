@@ -20,9 +20,9 @@
       @foreach($pelanggans as $row)
       <tr>
         <th>{{ $no++ }}</th>
-        <td>{{ $row->nama }}</td>
+        <td>{{ $row->nama_pelanggan }}</td>
         <td>{{ $row->no_ktp }}</td>
-        <td>{{ $row->alamat }}</td>
+        <td>{{ $row->alamat_pelanggan }}</td>
       @endforeach
     </tbody>
   </table>
