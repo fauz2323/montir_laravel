@@ -44,6 +44,7 @@
                     <a class="collapse-item" href="{{ route('supplier.index') }}">Data Supplier</a>
                     <a class="collapse-item" href="{{ route('service.index') }}">Data Service</a>
                     <a class="collapse-item" href="{{ route('detailservice.index') }}">Data Detail Service</a>
+                    <a class="collapse-item" href="{{ route('index-pembayaran') }}">Data Pembayaran</a>
                 </div>
             </div>
         </li>

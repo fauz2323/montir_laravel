@@ -8,6 +8,7 @@ use App\Http\Controllers\MotorController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\DetailServiceController;
 use App\Http\Controllers\controllerProfile;
+use App\Http\Controllers\DataPembayaranController;
 use App\Http\Controllers\User\DataUserController;
 use App\Http\Controllers\User\MotorUserController;
 use App\Http\Controllers\User\OrderUserController;
@@ -95,6 +96,10 @@ Route::middleware('auth')->group(function () {
 
     //Detail Service
     Route::resource('detailservice', DetailServiceController::class);
+    Route::get('confirm/{id}/service', [DetailServiceController::class, 'confirm'])->name('confirm_service');
+
+    //data Pembayaran
+    Route::get('data-pembayaran', [DataPembayaranController::class, 'index'])->name('index-pembayaran');
 
     //user
     ///data pelanggan

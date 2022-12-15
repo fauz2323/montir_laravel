@@ -31,6 +31,7 @@
                                 <th>Tgl Service</th>
                                 <th>Jam Service</th>
                                 <th>Total Harga</th>
+                                <th>Status</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -87,8 +88,8 @@
                             <label for="exampleInputEmail1">Keluhan</label>
                             <textarea class="form-control" id="exampleFormControlTextarea1" name="keluhan" rows="3"></textarea>
                         </div>
-                        <label for="exampleInputEmail1">Spare Part</label>
                         <div class="mb-3">
+                            <label for="exampleInputEmail1">Spare Part</label>
                             <div class="form-group increment">
                                 <div class="input-group">
                                     <select name="spare[]" class="form-control form-control-lg">
@@ -188,7 +189,10 @@
                         data: 'total_harga',
                         name: 'total_harga',
                     },
-
+                    {
+                        data: 'status',
+                        name: 'status',
+                    },
                 ]
             });
         });

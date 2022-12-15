@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DataPembayaran;
 use App\Models\DetailService;
 use App\Models\Pelanggan;
 use App\Models\Montir;
 use App\Models\Sparepart;
 use App\Models\Service;
+use App\Service\SparePartDetail;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB as DetailDB;
 
 class DetailServiceController extends Controller
@@ -19,9 +23,9 @@ class DetailServiceController extends Controller
      */
     public function index()
     {
-        $ar_detailService = DetailService::with('pelanggan','service','spare_part','montir')->paginate(5);
-      
-        return view('admin.detail_service.index',compact('ar_detailService'))
+        $ar_detailService = DetailService::with('pelanggan', 'service', 'montir')->paginate(5);
+
+        return view('admin.detail_service.index', compact('ar_detailService'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
@@ -36,7 +40,7 @@ class DetailServiceController extends Controller
         $service = Service::all();
         $montir = Montir::all();
         $spare_part = Sparepart::all();
-        return view('admin.detail_service.create', compact('pelanggan','service','spare_part','montir'));
+        return view('admin.detail_service.create', compact('pelanggan', 'service', 'spare_part', 'montir'));
     }
 
     /**
@@ -47,19 +51,30 @@ class DetailServiceController extends Controller
      */
     public function store(Request $request)
     {
+
+        $date = Carbon::now();
+        $spare_part = new SparePartDetail;
+        $hargaService = Service::find($request->service_id)->harga_service;
+
+        $spare_part_detail = $spare_part->detail($request->spare);
+
+        $dataPelanggan = Pelanggan::find($request->pelanggan_id);
+
         DetailService::create([
+            'user_id' => $dataPelanggan->user->id,
             'pelanggan_id' => $request->pelanggan_id,
-            'tanggal_service' => $request->tanggal_service,
-            'jam_masuk' => $request->jam_masuk,
             'service_id' => $request->service_id,
-            'spare_part_id' => $request->spare_part_id,
             'montir_id' => $request->montir_id,
+            'spare_part' => implode(', ', $spare_part_detail['nama_sparepart']),
+            'tanggal_service' => $date->toDateString(),
+            'jam_masuk' => $date->toTimeString(),
             'keluhan' => $request->keluhan,
-            'total_harga' => $request->total_harga,
+            'total_harga' => $spare_part_detail['total'] + $hargaService
         ]);
 
+
         return redirect()->route('detailservice.index')
-                        ->with('Berhasil menambahkan data Detail Service');
+            ->with('Berhasil menambahkan data Detail Service');
     }
 
     /**
@@ -81,12 +96,11 @@ class DetailServiceController extends Controller
      */
     public function edit(DetailService $detailservice)
     {
-        
+
         $pelanggan = Pelanggan::all();
         $service = Service::all();
         $montir = Montir::all();
-        $spare_part = Sparepart::all();
-        return view('admin.detail_service.edit', compact('pelanggan','service','spare_part','montir','detailservice'));
+        return view('admin.detail_service.edit', compact('pelanggan', 'service', 'montir', 'detailservice'));
     }
 
     /**
@@ -100,7 +114,7 @@ class DetailServiceController extends Controller
     {
         $detailservice->update($request->all());
         return redirect()->route('detailservice.index')
-                        ->with('Berhasil mengubah data Detail Service');
+            ->with('Berhasil mengubah data Detail Service');
     }
 
     /**
@@ -113,6 +127,25 @@ class DetailServiceController extends Controller
     {
         $detailservice->delete();
         return redirect()->route('detailservice.index')
-                        ->with('success','Data detail service berhasil dihapus');
+            ->with('success', 'Data detail service berhasil dihapus');
+    }
+
+    public function confirm($id)
+    {
+        $data = DetailService::find($id);
+        $data->status = 'Selesai';
+        $data->save();
+
+        DataPembayaran::create([
+            'pelanggan' => $data->pelanggan->nama_pelanggan,
+            'nama_montir' => $data->montir->nama,
+            'keluhan' => $data->keluhan,
+            'total' => $data->total_harga,
+            'spare_part' => $data->spare_part,
+            'jenis_servis' => $data->service->nama_service
+        ]);
+
+        return redirect()->route('detailservice.index')
+            ->with('success', 'Sukses menyelesaikan pesanan');
     }
 }

@@ -60,7 +60,8 @@ class OrderUserController extends Controller
             'tanggal_service' => $date->toDateString(),
             'jam_masuk' => $date->toTimeString(),
             'keluhan' => $request->keluhan,
-            'total_harga' => $spare_part_detail['total'] + $hargaService
+            'total_harga' => $spare_part_detail['total'] + $hargaService,
+            'status' => 'pending'
         ]);
 
         return redirect()->back();

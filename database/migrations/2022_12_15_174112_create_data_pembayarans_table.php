@@ -13,14 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('profile', function (Blueprint $table) {
+        Schema::create('data_pembayarans', function (Blueprint $table) {
             $table->id();
-            $table->string('photo');
-            $table->string('name');
-            $table->enum('gender', ['L', 'P']);
-            $table->text('alamat');
-            $table->string('phone');
-            $table->string('email')->unique();
+            $table->string('pelanggan');
+            $table->string('nama_montir');
+            $table->text('keluhan');
+            $table->string('total');
+            $table->string('jenis_servis');
+            $table->text('spare_part');
             $table->timestamps();
         });
     }
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('profile');
+        Schema::dropIfExists('data_pembayarans');
     }
 };
