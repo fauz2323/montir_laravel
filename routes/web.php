@@ -9,6 +9,7 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\DetailServiceController;
 use App\Http\Controllers\controllerProfile;
 use App\Http\Controllers\DataPembayaranController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\User\DataUserController;
 use App\Http\Controllers\User\MotorUserController;
 use App\Http\Controllers\User\OrderUserController;
@@ -45,9 +46,7 @@ Route::get('/data-admin', function () {
 
 Route::middleware('auth')->group(function () {
 
-    Route::get('/adm', function () {
-        return view('admin.master');
-    });
+    Route::get('/adm', [HomeController::class, 'index']);
 
 
     //MONTIR
