@@ -57,7 +57,7 @@ class MotorController extends Controller
      */
     public function show(Motor $motor)
     {
-        
+        return view('admin.motor.detail', compact('motor'));
     }
 
     /**

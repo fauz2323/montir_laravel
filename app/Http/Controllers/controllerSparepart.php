@@ -57,7 +57,8 @@ class controllerSparepart extends Controller
      */
     public function show($id)
     {
-        //
+        $ar_sparepart = Sparepart::find($id);
+        return view('admin.sparepart.detail', compact('ar_sparepart'));
     }
 
     public function detail($id)
@@ -113,7 +114,7 @@ class controllerSparepart extends Controller
     public function sparepartPDF()
     {
         $sparepart = SparepartDB::all();
-        $pdf = PDF::loadView('admin.sparepart.sparepartPDF', ['sparepart'=>$sparepart]);
+        $pdf = PDF::loadView('admin.sparepart.sparepartPDF', ['sparepart' => $sparepart]);
         return $pdf->download('data_sparepart.pdf');
     }
 

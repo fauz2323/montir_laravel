@@ -15,8 +15,8 @@ class ServiceController extends Controller
     public function index()
     {
         $service = Service::paginate(5);
-      
-        return view('admin.service.index',compact('service'))
+
+        return view('admin.service.index', compact('service'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
@@ -45,7 +45,7 @@ class ServiceController extends Controller
         Service::create($request->all());
 
         return redirect()->route('service.index')
-                        ->with('Berhasil menambahkan data service');
+            ->with('Berhasil menambahkan data service');
     }
 
     /**
@@ -56,7 +56,7 @@ class ServiceController extends Controller
      */
     public function show(Service $service)
     {
-        //
+        return view('admin.service.detail', compact('service'));
     }
 
     /**
@@ -67,7 +67,7 @@ class ServiceController extends Controller
      */
     public function edit(Service $service)
     {
-        return view('admin.service.edit',compact('service'));
+        return view('admin.service.edit', compact('service'));
     }
 
     /**
@@ -83,11 +83,11 @@ class ServiceController extends Controller
             'nama_service' => 'required',
             'harga_service' => 'required'
         ]);
-      
+
         $service->update($request->all());
-      
+
         return redirect()->route('service.index')
-                        ->with('success','Data Service berhasil diubah');
+            ->with('success', 'Data Service berhasil diubah');
     }
 
     /**
@@ -100,6 +100,6 @@ class ServiceController extends Controller
     {
         $service->delete();
         return redirect()->route('service.index')
-                        ->with('success','Data service berhasil dihapus');
+            ->with('success', 'Data service berhasil dihapus');
     }
 }

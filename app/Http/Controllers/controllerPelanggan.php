@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use App\Models\Pelanggan;
 use App\Models\Motor;
@@ -11,7 +12,8 @@ use Illuminate\Support\Facades\DB as PelangganDB;
 
 class controllerPelanggan extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $ar_pelanggan = PelangganDB::table('pelanggan')->get();
         return view('admin.pelanggan.index', compact('ar_pelanggan'));
     }
@@ -35,18 +37,19 @@ class controllerPelanggan extends Controller
         ]);
 
         return redirect()->route('pelanggan.index')
-                        ->with('success', 'Data Pegawai Berhasil Ditambah');
+            ->with('success', 'Data Pegawai Berhasil Ditambah');
     }
 
-    public function show(Pelanggan $pelanggan)
+    public function show($id)
     {
-        //
+        $pelanggan = Pelanggan::find($id);
+        return view('admin.pelanggan.detail', compact('pelanggan'));
     }
 
     public function edit(Pelanggan $pelanggan)
     {
-        $ar_motor=Motor::all();
-        return view('admin.pelanggan.edit',compact('pelanggan', 'ar_motor'));
+        $ar_motor = Motor::all();
+        return view('admin.pelanggan.edit', compact('pelanggan', 'ar_motor'));
     }
 
     public function update(Request $request, Pelanggan $pelanggan)
@@ -65,20 +68,20 @@ class controllerPelanggan extends Controller
         ]);
 
         return redirect()->route('pelanggan.index')
-                        ->with('success','Data Pelanggan berhasil diubah');
+            ->with('success', 'Data Pelanggan berhasil diubah');
     }
 
     public function destroy(Pelanggan $pelanggan)
     {
         $pelanggan->delete();
         return redirect()->route('pelanggan.index')
-                        ->with('success','Data pelanggan berhasil dihapus');
+            ->with('success', 'Data pelanggan berhasil dihapus');
     }
 
     public function pelangganPDF()
     {
         $pelanggan = Pelanggan::all();
-        $pdf = PDF::loadView('admin.pelanggan.pelangganPDF', ['pelanggan'=>$pelanggan]);
+        $pdf = PDF::loadView('admin.pelanggan.pelangganPDF', ['pelanggan' => $pelanggan]);
         return $pdf->download('data_pelanggan.pdf');
     }
 

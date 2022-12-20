@@ -15,8 +15,8 @@ class SupplierController extends Controller
     public function index()
     {
         $suppliers = Supplier::paginate(5);
-      
-        return view('admin.supplier.index',compact('suppliers'))
+
+        return view('admin.supplier.index', compact('suppliers'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
@@ -46,7 +46,7 @@ class SupplierController extends Controller
         Supplier::create($request->all());
 
         return redirect()->route('supplier.index')
-                        ->with('Berhasil menambahkan data supplier');
+            ->with('Berhasil menambahkan data supplier');
     }
 
     /**
@@ -57,7 +57,7 @@ class SupplierController extends Controller
      */
     public function show(Supplier $supplier)
     {
-        //
+        return view('admin.supplier.detail', compact('supplier'));
     }
 
     /**
@@ -68,7 +68,7 @@ class SupplierController extends Controller
      */
     public function edit(Supplier $supplier)
     {
-        return view('admin.supplier.edit',compact('supplier'));
+        return view('admin.supplier.edit', compact('supplier'));
     }
 
     /**
@@ -85,11 +85,11 @@ class SupplierController extends Controller
             'alamat' => 'required',
             'no_telp' => 'required'
         ]);
-      
+
         $supplier->update($request->all());
-      
+
         return redirect()->route('supplier.index')
-                        ->with('success','Data Supplier berhasil diubah');
+            ->with('success', 'Data Supplier berhasil diubah');
     }
 
     /**
@@ -102,7 +102,6 @@ class SupplierController extends Controller
     {
         $supplier->delete();
         return redirect()->route('supplier.index')
-                        ->with('success','Data Supplier berhasil dihapus');
-
+            ->with('success', 'Data Supplier berhasil dihapus');
     }
 }
