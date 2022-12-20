@@ -83,9 +83,10 @@ class DetailServiceController extends Controller
      * @param  \App\Models\DetailService  $detailService
      * @return \Illuminate\Http\Response
      */
-    public function show(DetailService $detailservice)
+    public function show($id)
     {
-        //
+        $data = DetailService::find($id);
+        return view('admin.detail_service.detail', compact('data'));
     }
 
     /**

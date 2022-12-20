@@ -65,8 +65,41 @@
                 </div>
             </div>
 
+            <div class="col-12">
+                <div class="card">
+                    <canvas class="order-overview-chart" id="myChart"></canvas>
+                </div>
+            </div>
 
         </div>
     </div>
     <!-- /.container-fluid -->
 @endsection
+
+@push('script')
+    <script>
+        var data = {!! json_encode($penjualanCOunt) !!};
+        const ctx = document.getElementById('myChart').getContext('2d');
+        const myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['jan', 'feb', 'mar', 'apr', 'may', 'june', 'july', 'aug', 'sep', 'oct', 'nov', 'dec'],
+                datasets: [{
+                    label: 'Total Penjualan : ',
+                    data: data,
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgba(255, 99, 132, 0.2)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                maintainAspectRatio: false,
+            }
+        });
+    </script>
+@endpush
