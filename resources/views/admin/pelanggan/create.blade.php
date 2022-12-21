@@ -20,15 +20,6 @@
                             <label for="NAMA">ALAMAT PELANGGAN</label>
                             <textarea class="form-control" name="alamat_pelanggan"placeholder="Ex : jakarta selatan, jalan zeni TNI AD V"></textarea>
                         </div>
-                        <div class="form-group">
-                            <label for="NAMA">NOMOR MOTOR</label>
-                            <select class="form-control main w-25" name="motor_id">
-                                    <option selected>-- Pilih Nomor Motor --</option>
-                                    @foreach ($nomor_motor as $nm)
-                                    <option value="{{$nm->id}}">{{$nm->nomor_motor}}</option>
-                                    @endforeach
-                            </select>
-                        </div>
                         <div class="form-group mt-2">
                             <button type="submit" class="btn btn-primary" onclick="myallert()"> Tambah Pelanggan </button>
                         </div>

@@ -17,6 +17,15 @@
                                 @endforeach
                             </select>
                         </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Motor</label>
+                            <select name="motor_id" class="form-control form-control-lg">
+                                <option disabled selected>Pilih Motor</option>
+                                @foreach ($motor as $item)
+                                    <option value="{{ $item->id }}">{{ $item->merek_motor }}</option>
+                                @endforeach
+                            </select>
+                        </div>
                         {{-- <div class="form-group">
                             <label>Tanggal Service</label>
                             <input type="date" name="tanggal_service" class="form-control">

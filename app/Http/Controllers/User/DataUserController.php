@@ -55,12 +55,11 @@ class DataUserController extends Controller
             'alamat_pelanggan' => 'required',
             'nama_pelanggan' => 'required',
             'no_ktp' => 'required',
-            'motor_id' => 'required',
         ]);
 
         $data = User::find(Auth::user()->id);
         if ($data->dataPelanggan()->first()) {
-            return redirect()->back()->with('success', 'Data Pelanggan sudah ada');
+            return redirect()->route('index-pelanggan')->with('success', 'Data Pelanggan sudah ada');
         } else {
             $data->dataPelanggan()->create($request->all());
         }

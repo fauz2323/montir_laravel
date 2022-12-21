@@ -55,7 +55,8 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Nama Pelanggan</label>
-                            <input type="text" class="form-control" name="nama_pelanggan">
+                            <input type="text" class="form-control" name="nama_pelanggan"
+                                value="{{ Auth::user()->name }}">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">No. KTP Pelanggan</label>
@@ -65,15 +66,7 @@
                             <label for="exampleInputEmail1">Alamat</label>
                             <textarea class="form-control" id="exampleFormControlTextarea1" name="alamat_pelanggan" rows="3"></textarea>
                         </div>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Motor</label>
-                            <select name="motor_id" class="form-control form-control-lg">
-                                <option disabled selected>Pilih Motor</option>
-                                @foreach ($motor as $item)
-                                    <option value="{{ $item->id }}">{{ $item->merek_motor }}</option>
-                                @endforeach
-                            </select>
-                        </div>
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

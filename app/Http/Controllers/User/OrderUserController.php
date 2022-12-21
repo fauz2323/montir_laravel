@@ -24,6 +24,7 @@ class OrderUserController extends Controller
 
     public function orderList(Request $request)
     {
+        $motor =  Motor::where('user_id', Auth::user()->id)->get();
         $montir = Montir::all();
         $sparePart = Sparepart::where('stok', '>', 0)->get();
         $service = Service::all();
@@ -33,7 +34,7 @@ class OrderUserController extends Controller
                 ->addIndexColumn()
                 ->make(true);
         }
-        return view('user.order.index', compact('montir', 'sparePart', 'service'));
+        return view('user.order.index', compact('montir', 'sparePart', 'service', 'motor'));
     }
 
     public function addOrder(Request $request)
@@ -56,6 +57,7 @@ class OrderUserController extends Controller
             'pelanggan_id' => $request->pelanggan,
             'service_id' => $request->service,
             'montir_id' => $request->montir,
+            'motor_id' => $request->motor_id,
             'spare_part' => implode(', ', $spare_part_detail['nama_sparepart']),
             'tanggal_service' => $date->toDateString(),
             'jam_masuk' => $date->toTimeString(),

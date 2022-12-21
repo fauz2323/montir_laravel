@@ -6,6 +6,7 @@ use App\Models\DataPembayaran;
 use App\Models\DetailService;
 use App\Models\Pelanggan;
 use App\Models\Montir;
+use App\Models\Motor;
 use App\Models\Sparepart;
 use App\Models\Service;
 use App\Service\SparePartDetail;
@@ -38,8 +39,9 @@ class DetailServiceController extends Controller
         $pelanggan = Pelanggan::all();
         $service = Service::all();
         $montir = Montir::all();
+        $motor = Motor::all();
         $spare_part = Sparepart::where('stok', '>', 0)->get();
-        return view('admin.detail_service.create', compact('pelanggan', 'service', 'spare_part', 'montir'));
+        return view('admin.detail_service.create', compact('pelanggan', 'service', 'spare_part', 'montir', 'motor'));
     }
 
     /**
@@ -64,6 +66,7 @@ class DetailServiceController extends Controller
             'pelanggan_id' => $request->pelanggan_id,
             'service_id' => $request->service_id,
             'montir_id' => $request->montir_id,
+            'motor_id' => $request->motor_id,
             'spare_part' => implode(', ', $spare_part_detail['nama_sparepart']),
             'tanggal_service' => $date->toDateString(),
             'jam_masuk' => $date->toTimeString(),

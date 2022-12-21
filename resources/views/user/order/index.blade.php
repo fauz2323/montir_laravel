@@ -85,9 +85,19 @@
                             </select>
                         </div>
                         <div class="form-group">
+                            <label for="exampleInputEmail1">Motor</label>
+                            <select name="motor_id" class="form-control form-control-lg">
+                                <option disabled selected>Pilih Motor</option>
+                                @foreach ($motor as $item)
+                                    <option value="{{ $item->id }}">{{ $item->merek_motor }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
                             <label for="exampleInputEmail1">Keluhan</label>
                             <textarea class="form-control" id="exampleFormControlTextarea1" name="keluhan" rows="3"></textarea>
                         </div>
+
                         <div class="mb-3">
                             <label for="exampleInputEmail1">Spare Part</label>
                             <div class="form-group increment">
