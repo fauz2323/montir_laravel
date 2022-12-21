@@ -23,10 +23,9 @@ class DetailServiceController extends Controller
      */
     public function index()
     {
-        $ar_detailService = DetailService::with('pelanggan', 'service', 'montir')->paginate(5);
+        $ar_detailService = DetailService::with('pelanggan', 'service', 'montir')->get();
 
-        return view('admin.detail_service.index', compact('ar_detailService'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
+        return view('admin.detail_service.index', compact('ar_detailService'));
     }
 
     /**
