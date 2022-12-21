@@ -8,6 +8,7 @@ use App\Models\Motor;
 use PDF;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\PelangganExport;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB as PelangganDB;
 
 class controllerPelanggan extends Controller
@@ -30,6 +31,7 @@ class controllerPelanggan extends Controller
     public function store(Request $request)
     {
         PelangganDB::table('pelanggan')->insert([
+            'user_id' => Auth::user()->id,
             'nama_pelanggan' => request('nama_pelanggan'),
             'no_ktp' => request('no_ktp'),
             'alamat_pelanggan' => request('alamat_pelanggan'),
