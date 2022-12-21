@@ -59,7 +59,12 @@ class DataUserController extends Controller
         ]);
 
         $data = User::find(Auth::user()->id);
-        $data->dataPelanggan()->create($request->all());
+        if ($data->dataPelanggan()->first()) {
+            return redirect()->back()->with('success', 'Data Pelanggan sudah ada');
+        } else {
+            $data->dataPelanggan()->create($request->all());
+        }
+
 
         return redirect()->back()->with('success', 'success add data');
     }
