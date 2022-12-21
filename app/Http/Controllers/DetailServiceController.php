@@ -39,7 +39,7 @@ class DetailServiceController extends Controller
         $pelanggan = Pelanggan::all();
         $service = Service::all();
         $montir = Montir::all();
-        $spare_part = Sparepart::all();
+        $spare_part = Sparepart::where('stok', '>', 0)->get();
         return view('admin.detail_service.create', compact('pelanggan', 'service', 'spare_part', 'montir'));
     }
 

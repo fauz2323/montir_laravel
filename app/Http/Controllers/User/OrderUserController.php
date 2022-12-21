@@ -25,7 +25,7 @@ class OrderUserController extends Controller
     public function orderList(Request $request)
     {
         $montir = Montir::all();
-        $sparePart = Sparepart::all();
+        $sparePart = Sparepart::where('stok', '>', 0)->get();
         $service = Service::all();
         if ($request->ajax()) {
             $pelanggan = DetailService::where('user_id', Auth::user()->id)->with('montir', 'pelanggan', 'service')->get();
