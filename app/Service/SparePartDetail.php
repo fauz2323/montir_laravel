@@ -15,6 +15,8 @@ class SparePartDetail
             $spare = Sparepart::all();
             foreach ($listSpare as $key) {
                 $spare_part = $spare->find($key);
+                $spare_part->stok = $spare_part->stok - 1;
+                $spare_part->save();
                 $total = $total + $spare_part->harga;
                 $nama_sparepart[] = $spare_part->merek;
             }
