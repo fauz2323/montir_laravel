@@ -14,7 +14,7 @@ class SupplierController extends Controller
      */
     public function index()
     {
-        $suppliers = Supplier::paginate(5);
+        $suppliers = Supplier::all();
 
         return view('admin.supplier.index', compact('suppliers'))
             ->with('i', (request()->input('page', 1) - 1) * 5);

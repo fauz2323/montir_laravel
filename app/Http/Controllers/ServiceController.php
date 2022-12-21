@@ -14,7 +14,7 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        $service = Service::paginate(5);
+        $service = Service::all();
 
         return view('admin.service.index', compact('service'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
