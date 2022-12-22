@@ -17,6 +17,7 @@ class DetailService extends Model
         'spare_part',
         'service_id',
         'montir_id',
+        'motor_id',
         'spare_part_id',
         'tanggal_service',
         'jam_masuk',
