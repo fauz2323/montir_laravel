@@ -26,7 +26,6 @@
                                 <th>Nama Pelanggan</th>
                                 <th>Nomor KTP</th>
                                 <th>Alamat</th>
-                                <th>Motor</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -103,10 +102,6 @@
                     {
                         data: 'alamat_pelanggan',
                         name: 'alamat_pelanggan',
-                    },
-                    {
-                        data: 'motor.merek_motor',
-                        name: 'motor.merek_motor',
                     },
                     {
                         data: 'action',

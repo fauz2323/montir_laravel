@@ -27,7 +27,7 @@ class DataUserController extends Controller
         }
 
         if ($request->ajax()) {
-            $pelanggan = Pelanggan::where('user_id', Auth::user()->id)->with('motor')->get();
+            $pelanggan = Pelanggan::where('user_id', Auth::user()->id)->get();
             return DataTables::of($pelanggan)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {

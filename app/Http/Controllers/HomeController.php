@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\DataPembayaran;
 use App\Models\DetailService;
+use App\Models\Motor;
 use App\Models\Pelanggan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -28,8 +29,13 @@ class HomeController extends Controller
     public function index()
     {
         if (Auth::user()->hasRole('user')) {
+            $motor = Motor::where('user_id', Auth::user()->id)->count();
+            $totalService = Motor::where([
+                'user_id' => Auth::user()->id,
+                'status' => 'Selesai'
+            ])->count();
             $antrian = DetailService::where('status', 'pending')->count();
-            return view('dahsboard.user', compact('antrian'));
+            return view('dahsboard.user', compact('antrian', 'totalService', 'motor'));
         } else {
             $mounth = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
             foreach ($mounth as $key) {
