@@ -59,12 +59,7 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Nama Pelanggan</label>
-                            <select name="pelanggan" class="form-control form-control-lg">
-                                <option disabled selected>Pilih Pelanggan</option>
-                                @foreach (Auth::user()->dataPelanggan as $item)
-                                    <option value="{{ $item->id }}">{{ $item->nama_pelanggan }}</option>
-                                @endforeach
-                            </select>
+                            <input type="text" class="form-control" value="{{ $pelanggan->nama_pelanggan }}" disabled>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Servis</label>

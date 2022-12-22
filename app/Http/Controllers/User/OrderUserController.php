@@ -28,23 +28,28 @@ class OrderUserController extends Controller
         $montir = Montir::all();
         $sparePart = Sparepart::where('stok', '>', 0)->get();
         $service = Service::all();
+        $pelanggan = Pelanggan::where('user_id', Auth::user()->id)->first();
+
         if ($request->ajax()) {
             $pelanggan = DetailService::where('user_id', Auth::user()->id)->with('montir', 'pelanggan', 'service')->get();
             return DataTables::of($pelanggan)
                 ->addIndexColumn()
                 ->make(true);
         }
-        return view('user.order.index', compact('montir', 'sparePart', 'service', 'motor'));
+        return view('user.order.index', compact('montir', 'sparePart', 'service', 'motor', 'pelanggan'));
     }
 
     public function addOrder(Request $request)
     {
         $request->validate([
-            'pelanggan' => 'required',
             'service' => 'required',
             'keluhan' => 'required',
             'montir' => 'required',
         ]);
+        $pelanggan = Pelanggan::where('user_id', Auth::user()->id)->first();
+        if (!$pelanggan) {
+            return redirect()->back()->with('error', 'Akun tidak memiliki data pelanggan');
+        }
 
         $date = Carbon::now();
         $spare_part = new SparePartDetail;
@@ -54,7 +59,7 @@ class OrderUserController extends Controller
 
         DetailService::create([
             'user_id' => Auth::user()->id,
-            'pelanggan_id' => $request->pelanggan,
+            'pelanggan_id' => $pelanggan->id,
             'service_id' => $request->service,
             'montir_id' => $request->montir,
             'motor_id' => $request->motor_id,
