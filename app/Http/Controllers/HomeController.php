@@ -30,7 +30,7 @@ class HomeController extends Controller
     {
         if (Auth::user()->hasRole('user')) {
             $motor = Motor::where('user_id', Auth::user()->id)->count();
-            $totalService = Motor::where([
+            $totalService = DetailService::where([
                 'user_id' => Auth::user()->id,
                 'status' => 'Selesai'
             ])->count();
