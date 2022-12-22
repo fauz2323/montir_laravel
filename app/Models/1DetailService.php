@@ -8,13 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class DetailService extends Model
 {
     use HasFactory;
-    
+
     public $timestamps = false;
     protected $table = 'detail_service';
     protected $fillable = [
         'pelanggan_id',
         'service_id',
         'montir_id',
+        'motor_id',
         'spare_part_id',
         'tanggal_service',
         'jam_masuk',
@@ -22,17 +23,20 @@ class DetailService extends Model
         'total_harga'
     ];
 
-    public function pelanggan(){
+    public function pelanggan()
+    {
         return $this->belongsTo(Pelanggan::class);
     }
-    public function service(){
+    public function service()
+    {
         return $this->belongsTo(Service::class);
     }
-    public function montir(){
+    public function montir()
+    {
         return $this->belongsTo(Montir::class);
     }
-    public function spare_part(){
+    public function spare_part()
+    {
         return $this->belongsTo(Sparepart::class);
     }
-    
 }
